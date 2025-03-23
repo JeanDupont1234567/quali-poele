@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Testez votre éligibilité aux aides financières pour l'installation d'un poêle à bois ou à granulés. Devis gratuit et sans engagement.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="css/landing.css" as="style">
+    <link rel="preload" href="css/qualification.css" as="style">
+    <link rel="preload" href="js/qualification.js" as="script">
+    
+    <title>Demande de devis - Quali'Poêle</title>
+    
+    <!-- Feuilles de style -->
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/qualification.css">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Test d'éligibilité et devis pour poêle à bois ou granulés",
+      "provider": {
+        "@type": "Organization",
+        "name": "Quali'Poêle",
+        "logo": "img/logo.png",
+        "url": "https://www.qualipoele.fr"
+      },
+      "description": "Testez votre éligibilité aux aides financières et demandez un devis gratuit pour l'installation d'un poêle à bois ou à granulés.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+</head>
+<body class="dark-theme">
+    <!-- En-tête avec lien de retour -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="header-logo">
+                    <img src="img/logo.png" alt="Quali'Poêle">
+                </a>
+                <div class="header-actions">
+                    <a href="index.html" class="back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Retour à l'accueil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <div class="container">
+            <!-- Titre de la page -->
+            <h1 class="main-title">Votre devis personnalisé</h1>
+            <p class="subtitle">Remplissez ce formulaire pour obtenir un devis gratuit et estimer vos aides financières</p>
+
+            <!-- Message de bienvenue pour les utilisateurs redirigés -->
+            <div id="welcome-message" class="alert alert-success" style="display:none; opacity: 1; transition: opacity 1s ease-out;">
+                Bienvenue dans votre espace client ! Pour commencer, nous vous invitons à demander un devis gratuit pour votre projet.
+            </div>
+
+            <!-- Barre de progression -->
+            <div class="progress-container">
+                <div class="progress-indicators">
+                    <div class="step-indicator active" data-step="1">1</div>
+                    <div class="step-indicator" data-step="2">2</div>
+                    <div class="step-indicator" data-step="3">3</div>
+                    <div class="step-indicator" data-step="4">4</div>
+                    <div class="step-indicator" data-step="5">5</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner"></div>
+                </div>
+            </div>
+
+            <!-- Formulaire de qualification -->
+            <form id="qualification-form" class="qualification-form" method="post" action="process_qualification.php">
+                <?php
+                // Initialiser la session si elle n'est pas déjà démarrée
+                session_start();
+                
+                // Générer un token CSRF s'il n'existe pas déjà
+                if (!isset($_SESSION['csrf_token'])) {
+                    if (function_exists('random_bytes')) {
+                        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                    } else if (function_exists('openssl_random_pseudo_bytes')) {
+                        $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+                    } else {
+                        $_SESSION['csrf_token'] = bin2hex(mt_rand(0, mt_getrandmax()) . uniqid(mt_rand(), true));
+                    }
+                }
+                ?>
+                
+                <!-- Token CSRF caché -->
+                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                
+                <!-- Étape 1: Situation -->
+                <div class="form-step active">
+                    <h2 class="step-title">Votre situation</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="situation">Vous êtes</label>
+                            <select id="situation" name="situation" class="form-input">
+                                <option value="Propriétaire occupant">Propriétaire occupant</option>
+                                <option value="Propriétaire bailleur">Propriétaire bailleur</option>
+                                <option value="Locataire">Locataire</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-next">Suivant</button>
+                    </div>
+                </div>
+                
+                <!-- Étape 2: Habitation -->
+                <div class="form-step">
+                    <h2 class="step-title">Votre logement</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="type_habitation">Type de logement</label>
+                            <select id="type_habitation" name="type_habitation" class="form-input" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Maison individuelle">Maison individuelle</option>
+                                <option value="Appartement">Appartement</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="surface">Surface habitable (m²)</label>
+                            <input type="number" id="surface" name="surface" class="form-input" min="15" max="500" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="annee_construction">Année de construction</label>
+                            <select id="annee_construction" name="annee_construction" class="form-input">
+                                <option value="2020">Après 2020</option>
+                                <option value="2012">Entre 2012 et 2020</option>
+                                <option value="2005">Entre 2005 et 2012</option>
+                                <option value="1990">Entre 1990 et 2005</option>
+                                <option value="1975">Entre 1975 et 1990</option>
+                                <option value="1950">Entre 1950 et 1975</option>
+                                <option value="1919">Entre 1919 et 1950</option>
+                                <option value="1900">Avant 1919</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev">Précédent</button>
+                        <button type="button" class="btn btn-next">Suivant</button>
+                    </div>
+                </div>
+                
+                <!-- Étape 3: Chauffage actuel -->
+                <div class="form-step">
+                    <h2 class="step-title">Votre chauffage actuel</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="chauffage_actuel">Type de chauffage actuel</label>
+                            <select id="chauffage_actuel" name="chauffage_actuel" class="form-input" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Électrique">Chauffage électrique</option>
+                                <option value="Gaz">Chaudière à gaz</option>
+                                <option value="Fioul">Chaudière au fioul</option>
+                                <option value="Bois">Poêle/Cheminée à bois</option>
+                                <option value="Granulés">Poêle à granulés</option>
+                                <option value="Charbon">Chaudière au charbon</option>
+                                <option value="Propane">Chaudière au propane</option>
+                                <option value="Pompe à chaleur">Pompe à chaleur</option>
+                                <option value="Aucun">Pas de chauffage</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev">Précédent</button>
+                        <button type="button" class="btn btn-next">Suivant</button>
+                    </div>
+                </div>
+                
+                <!-- Étape 4: Projet -->
+                <div class="form-step">
+                    <h2 class="step-title">Votre projet</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="type_chauffage">Type de chauffage souhaité</label>
+                            <select id="type_chauffage" name="type_chauffage" class="form-input" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Poêle à bois">Poêle à bois</option>
+                                <option value="Poêle à granulés">Poêle à granulés</option>
+                                <option value="Insert/Foyer fermé">Insert/Foyer fermé</option>
+                                <option value="Chaudière à granulés">Chaudière à granulés</option>
+                                <option value="Cuisinière à bois">Cuisinière à bois</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Budget estimé (€)</label>
+                            <select id="budget" name="budget" class="form-input">
+                                <option value="">Je ne sais pas encore</option>
+                                <option value="3000">Moins de 3 000€</option>
+                                <option value="4000">Entre 3 000€ et 5 000€</option>
+                                <option value="6000">Entre 5 000€ et 7 000€</option>
+                                <option value="8000">Entre 7 000€ et 10 000€</option>
+                                <option value="12000">Plus de 10 000€</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="delai_projet">Délai envisagé</label>
+                            <select id="delai_projet" name="delai_projet" class="form-input">
+                                <option value="Immédiat">Dès que possible</option>
+                                <option value="1 à 3 mois">Dans 1 à 3 mois</option>
+                                <option value="3 à 6 mois">Dans 3 à 6 mois</option>
+                                <option value="6 à 12 mois">Dans 6 à 12 mois</option>
+                                <option value="Plus d'un an">Dans plus d'un an</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="commentaire">Commentaire (optionnel)</label>
+                            <textarea id="commentaire" name="commentaire" class="form-input" rows="3" placeholder="Précisez vos besoins ou questions éventuelles"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev">Précédent</button>
+                        <button type="button" class="btn btn-next">Suivant</button>
+                    </div>
+                </div>
+                
+                <!-- Étape 5: Coordonnées -->
+                <div class="form-step">
+                    <h2 class="step-title">Vos coordonnées</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="code_postal">Code postal</label>
+                            <input type="text" id="code_postal" name="code_postal" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="rgpd" name="rgpd" required>
+                                <label for="rgpd">J'accepte que mes données soient traitées pour ma demande de devis *</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev">Précédent</button>
+                        <button type="submit" class="btn btn-submit">Obtenir mon devis</button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Spinner de chargement -->
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Analyse de votre éligibilité en cours...</p>
+            </div>
+            
+            <!-- Section des résultats (initialement cachée) -->
+            <div id="results-section" class="results-section">
+                <div class="result-header">
+                    <h2>Félicitations ! Vous êtes éligible</h2>
+                    <p>Selon notre première estimation, vous pourriez bénéficier de :</p>
+                    <div class="estimated-amount">
+                        <span id="total-aides">0 €</span>
+                        <span class="amount-label">d'aides financières</span>
+                    </div>
+                </div>
+                
+                <div id="aides-container" class="aides-container">
+                    <!-- Les cartes d'aides seront ajoutées dynamiquement ici -->
+                </div>
+                
+                <div class="next-steps">
+                    <h3>Que se passe-t-il maintenant ?</h3>
+                    <ol>
+                        <li>Un conseiller Quali'Poêle va étudier votre demande</li>
+                        <li>Vous recevrez un appel sous 24 à 48h pour discuter de votre projet</li>
+                        <li>Un devis détaillé vous sera envoyé, incluant toutes les aides disponibles</li>
+                        <li>Un technicien pourra se déplacer gratuitement pour confirmer la faisabilité</li>
+                    </ol>
+                </div>
+                
+                <div class="cta-container">
+                    <div class="cta-card">
+                        <h3>Consulter nos poêles</h3>
+                        <p>Découvrez notre sélection de poêles à bois et granulés des meilleures marques.</p>
+                        <a href="produits.html" class="cta-button">Voir les produits</a>
+                    </div>
+                    
+                    <div class="cta-card">
+                        <h3>Espace client</h3>
+                        <p>Suivez l'avancement de votre projet et échangez avec votre conseiller.</p>
+                        <a href="client/connexion.php" class="cta-button">Accéder</a>
+                    </div>
+                </div>
+                
+                <div class="testimonials">
+                    <h3>Ce que nos clients en disent</h3>
+                    <div class="testimonials-container">
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">★★★★★</div>
+                            <p>"J'ai économisé plus de 3000€ sur mon poêle à granulés grâce aux aides. Le service était impeccable !"</p>
+                            <div class="testimonial-author">Marie D., Annecy</div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">★★★★★</div>
+                            <p>"De la demande de devis à l'installation, tout s'est déroulé sans aucun souci. Je recommande vivement."</p>
+                            <div class="testimonial-author">Jean-Pierre M., Lyon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="Quali'Poêle" width="150">
+                </div>
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h3 class="footer-heading">À propos</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="qualification.html">Demander un devis</a></li>
+                            <li><a href="client/connexion.php">Espace client</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-heading">Légal</h3>
+                        <ul class="footer-links">
+                            <li><a href="mentions-legales.html">Mentions légales</a></li>
+                            <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Quali'Poêle - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts principaux -->
+    <script src="js/qualification.js"></script>
+    
+    <!-- Script pour afficher le message de bienvenue -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si le paramètre welcome=1 est présent dans l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('welcome') === '1') {
+                // Afficher le message de bienvenue
+                const welcomeMessage = document.getElementById('welcome-message');
+                if (welcomeMessage) {
+                    welcomeMessage.style.display = 'block';
+                    
+                    // Faire défiler jusqu'au message
+                    welcomeMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Cacher le message après 10 secondes
+                    setTimeout(function() {
+                        welcomeMessage.style.opacity = '0';
+                        setTimeout(function() {
+                            welcomeMessage.style.display = 'none';
+                        }, 1000);
+                    }, 10000);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

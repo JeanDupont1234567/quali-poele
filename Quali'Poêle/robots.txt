@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.qualipoele.fr/sitemap.xml
+
+# Ne pas indexer les éventuelles ressources temporaires
+Disallow: /tmp/
+Disallow: /old/ 

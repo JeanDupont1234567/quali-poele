@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Quali'Poêle</title>
+    <meta name="description" content="Contactez Quali'Poêle pour toute question sur nos poêles à bois et granulés. Notre équipe est à votre disposition pour vous accompagner dans votre projet.">
+    <link rel="canonical" href="https://www.qualipoele.fr/contact.html">
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="css/landing.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="Quali'Poêle" height="40" width="auto">
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="qualification.html" class="nav-link">Tester mon éligibilité</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+                <div class="user-actions">
+                    <a href="client/connexion.php" class="login-btn">Connexion</a>
+                    <a href="client/inscription.php" class="signup-btn">Inscription</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="index.html" itemprop="item">
+                        <span itemprop="name">Accueil</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name" class="current">Contact</span>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <main class="privacy-content">
+        <div class="container">
+            <article class="privacy-article">
+                <h1>Contactez-nous</h1>
+                
+                <section class="privacy-section">
+                    <h2>Nos coordonnées</h2>
+                    <div class="company-info">
+                        <p><strong>Quali'Poêle</strong><br>
+                        17000 La Rochelle, France<br>
+                        Email : <a href="mailto:qualipoele@gmail.com">qualipoele@gmail.com</a><br>
+                        Téléphone : 07 83 83 94 28</p>
+                    </div>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>Formulaire de contact</h2>
+                    <div class="form-container">
+                        <div class="form-content">
+                            <form id="contact-form" class="contact-form" action="mailto:qualipoele@gmail.com" method="post" enctype="text/plain">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name">Nom complet</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Sujet</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="" disabled selected>Sélectionnez un sujet</option>
+                                        <option value="devis">Demande de devis</option>
+                                        <option value="information">Demande d'information</option>
+                                        <option value="sav">Service après-vente</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Votre message</label>
+                                    <textarea id="message" name="message" rows="5" required></textarea>
+                                </div>
+                                
+                                <div class="form-group consent-group">
+                                    <input type="checkbox" id="consent" name="consent" required>
+                                    <label for="consent">J'accepte que mes informations soient utilisées pour traiter ma demande</label>
+                                </div>
+                                
+                                <button type="submit" class="submit-button">ENVOYER LE MESSAGE</button>
+                                
+                                <p class="form-privacy">Vos données sont protégées conformément à notre <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>Horaires d'ouverture</h2>
+                    <p>Notre service client est disponible :</p>
+                    <ul>
+                        <li>Du lundi au vendredi : 9h00 - 18h00</li>
+                        <li>Samedi : 9h00 - 12h00</li>
+                        <li>Dimanche et jours fériés : fermé</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+                    <a href="mentions-legales.html">Mentions légales</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Quali'Poêle. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/landing.js"></script>
+</body>
+</html> 

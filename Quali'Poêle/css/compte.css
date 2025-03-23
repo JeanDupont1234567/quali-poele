@@ -1,0 +1,328 @@
+/* Styles pour la page Mon Compte - Quali'Poêle */
+
+:root {
+    --primary-color: #2e7d32;
+    --primary-light: #60ad5e;
+    --primary-dark: #005005;
+    --secondary-color: #ff9800;
+    --secondary-light: #ffc947;
+    --secondary-dark: #c66900;
+    --dark-color: #263238;
+    --light-color: #eceff1;
+    --text-color: #37474f;
+    --error-color: #d32f2f;
+    --success-color: #2e7d32;
+    --warning-color: #f57c00;
+    --info-color: #0288d1;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.welcome-banner h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.welcome-banner p {
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+/* Profile Card */
+.profile-info p {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-info p strong {
+    color: var(--dark-color);
+}
+
+/* Projects Card */
+.latest-project h3 {
+    margin-top: 0;
+    color: var(--primary-dark);
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-details p {
+    margin: 0.5rem 0;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+}
+
+.badge-pending {
+    background-color: var(--info-color);
+}
+
+.badge-sent {
+    background-color: var(--warning-color);
+}
+
+.badge-planned {
+    background-color: var(--secondary-color);
+}
+
+.badge-progress {
+    background-color: var(--secondary-dark);
+}
+
+.badge-completed {
+    background-color: var(--success-color);
+}
+
+.status-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: #757575;
+}
+
+/* Messages Card */
+.badge-notification {
+    background-color: var(--error-color);
+}
+
+.notification-alert {
+    background-color: #fef8e3;
+    border-left: 4px solid var(--warning-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+/* Help Card */
+.contact-info {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    cursor: pointer;
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-dark);
+}
+
+.btn-logout {
+    background-color: var(--error-color);
+    color: white;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.btn-logout:hover {
+    background-color: #b71c1c;
+}
+
+.card-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    min-width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* Logout Section */
+.logout-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .welcome-banner {
+        padding: 1.5rem;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.75rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    .dashboard-card {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-header {
+        background-color: var(--primary-dark);
+    }
+    
+    .profile-info p strong {
+        color: #e0e0e0;
+    }
+    
+    .contact-info {
+        background-color: #2a2a2a;
+    }
+    
+    .notification-alert {
+        background-color: #332d19;
+        border-left-color: var(--warning-color);
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-dark);
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--primary-color);
+    }
+    
+    .btn-secondary {
+        background-color: var(--secondary-dark);
+    }
+    
+    .btn-secondary:hover {
+        background-color: var(--secondary-color);
+    }
+} 
